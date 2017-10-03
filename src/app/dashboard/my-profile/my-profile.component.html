@@ -1,0 +1,60 @@
+<div class='row'>
+  <div class='col-8 col-md-6 mt-4 offset-1'>
+      <h2>Welcome, {{getUserName()}}!</h2>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-8 col-md-6 mt-4 offset-1'>
+    <h3>New Bucket</h3>
+    <div class="form-group" style="color:red">{{bucketError}}</div>
+    <div class="createBucket">
+      <form (submit)="createBucket(bucketForm)" #bucketForm="ngForm">
+
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" name="title" [(ngModel)]="bucket.title" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Description:</label>
+          <div class="form-group">
+            <textarea class="form-control" [(ngModel)]="bucket.description" name="description" required id="description" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="users">
+          <select [(ngModel)]="bucket.tagged_user_id" name="tagged_user_id">
+              <option *ngFor = "let user of getOtherUsers()" [ngValue]=user._id>{{user.name}}
+              </option>
+           </select>
+        </div>
+        <input type="submit" value="Add To List" [disabled]="!bucketForm.form.valid" class="btn btn-primary">
+        
+      </form>
+    </div>
+
+  </div>
+</div>
+<div class='row'>
+  <div class='col-8 col-md-6 mt-4 offset-1'>
+
+    <p>Before I die I want to...</p>
+
+    <ul *ngFor='let bucket of buckets'>
+
+      <li><input [checked]="bucket.accomplished" (change)="checkBucket(bucket._id)" type="checkbox" class="form-check-input"> {{getName(bucket)}}{{bucket.title}} - {{bucket.description}} - {{bucket.createdAt | date}}</li>
+
+    </ul>
+
+    <p>List of other user (click to view profile)</p>
+
+    <ul *ngFor='let user of getOtherUsers()'>
+
+      <li><a href="#" [routerLink]="['user', user._id]">{{user.name}}</a></li>
+
+    </ul>
+
+  </div>
+
+
+</div>

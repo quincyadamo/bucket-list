@@ -1,0 +1,17 @@
+
+<div class='row'>
+  <div class='col-4 col-sm-3 mt-4 offset-1'>
+    <h3>Bucket Lists</h3>
+    
+    <div class="registerLogin">
+      <form (submit)="registerLogin()" #loginForm="ngForm">
+        <div class="form-group">
+          <label>Name:</label>
+            <input type="name" name="name" [(ngModel)]="user.name" required class="form-control">
+        </div>
+       
+        <input type="submit" value="Enter" [disabled]="!loginForm.form.valid" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+</div>

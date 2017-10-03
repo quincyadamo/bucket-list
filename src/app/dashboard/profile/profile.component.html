@@ -1,0 +1,33 @@
+<div class='row'>
+  <div class='col-8 col-md-6 mt-4 offset-1'>
+      <h2>{{userName}}'s Bucket List</h2>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-8 col-md-6 mt-4 offset-1'>
+
+    <p *ngIf="userBucketsFinished.length">Done</p>
+
+    <ul *ngFor='let bucket of userBucketsFinished'>
+
+      <li><input disabled [checked]="bucket.accomplished" type="checkbox" class="form-check-input">        
+        {{getName(bucket)}} {{bucket.title}} - {{bucket.description}} - {{bucket.createdAt | date}}
+      </li>
+
+    </ul>
+
+    <p *ngIf="userBucketsNotFinished.length">Pending</p>
+
+    <ul *ngFor='let bucket of userBucketsNotFinished'>
+
+      <li><input disabled [checked]="bucket.accomplished"  type="checkbox" class="form-check-input">  
+        {{getName(bucket)}} {{bucket.title}} - {{bucket.description}} - {{bucket.createdAt | date}}
+      </li>
+
+    </ul>
+
+  </div>
+
+
+</div>
